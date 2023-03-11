@@ -1,33 +1,81 @@
-const input = document.querySelector("input");
+// Tipos Primitivos
+let minhaString: string = "Olá, mundo!";
+let meuNumero: number = 123;
+let meuBooleano: boolean = true;
 
-const total = localStorage.getItem("total");
+// Tuplas
+let minhaTupla: [string, number] = ["banana", 10];
 
-if(input && total){
-  input.value = total;
-  calcularGanho(Number(input.value));
+// Arrays
+let meuArray: number[] = [1, 2, 3];
+let meuArray2: Array<string> = ["um", "dois", "três"];
+
+// Enums
+enum Cores {
+  Vermelho,
+  Verde,
+  Azul
 }
 
+let minhaCor: Cores = Cores.Vermelho;
 
-function calcularGanho(value: number) {
-    const p = document.querySelector("p");
-    if(p){
-    p.innerText = `ganho total: ${value + 100 - value * 0.2}`;
+// Any
+let qualquerCoisa: any = "teste";
+qualquerCoisa = 123;
+
+// Void
+function semRetorno(): void {
+  console.log("Não há retorno");
+}
+
+// Null e Undefined
+let nulo: null = null;
+let indefinido: undefined = undefined;
+
+// Union Types
+let meuNumeroOuString: number | string = 123;
+meuNumeroOuString = "teste";
+
+// Type Assertion
+let minhaVariavel: any = "testando";
+let tamanhoString: number = (<string>minhaVariavel).length;
+
+// Interfaces
+interface Pessoa {
+  nome: string;
+  idade: number;
+}
+
+function imprimirPessoa(pessoa: Pessoa) {
+  console.log("Nome: ", pessoa.nome, ", Idade: ", pessoa.idade);
+}
+
+let eu: Pessoa = { nome: "José", idade: 30 };
+imprimirPessoa(eu);
+
+// Classes
+class Animal {
+  private _nome: string;
+
+  constructor(nome: string) {
+    this._nome = nome;
+  }
+
+  public fazerBarulho() {
+    console.log(this._nome, "faz barulho");
   }
 }
 
-function totalMudou(){
-  if(input){
-
-    localStorage.setItem("total", input.value);
-    calcularGanho(Number(input.value))
+class Cachorro extends Animal {
+  constructor() {
+    super("Cachorro");
   }
 
-
-    //Salvando informações pós atualização da pagina
-
+  public latir() {
+    console.log("Au au!");
+  }
 }
 
-if(input){
-  input.addEventListener("keyup", totalMudou);
-}
-
+let cachorro = new Cachorro();
+cachorro.fazerBarulho();
+cachorro.latir();
